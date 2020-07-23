@@ -1,17 +1,6 @@
 import csv
 import sys
-
-# A rectangle object to represent the rectangles in out problem.
-class Rectangle:
-    def __init__(self, id, width, height, xpos, ypos):
-        self.id = id
-        self.width = width
-        self.height = height
-        self.xpos = xpos
-        self.ypos = ypos
-# Quickly print off this rectangles current values.
-    def print(self):
-        print("ID: " + str(self.id) + "\nDimensions: (" + str(self.width) + ", " + str(self.height) + ")" + "\nCoordinates: (" + str(self.xpos) + ", " + str(self.ypos) + ")")
+import Rectangle
 
 # Function for reading in a CSV file and translatng to Rectangle objects
 def get_rectangles(file_name):

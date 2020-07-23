@@ -33,7 +33,7 @@ file_name = ''
 if len(sys.argv) == 2:
     file_name = sys.argv[1]
     print(file_name)
-
+# parse in the csv to rectangle objects
 rectangles = {}
 rectangles = get_rectangles(file_name)
 for rect in rectangles:

@@ -1,7 +1,7 @@
 import csv
 
 # A rectangle object to represent the rectangles in out problem.
-class Rectangle:
+class Rect:
     def __init__(self, id, width, height, xpos, ypos):
         self.id = id
         self.width = width
@@ -23,5 +23,6 @@ def get_rectangles(file_name):
                 # print(f'Column names are {", ".join(row)}')
                 line_count += 1
             else:
-                rectangles.append(Rectangle(row[0], row[1], row[2], 0,0))
+                # add the new rectangle, make sure correct types eg integer.
+                rectangles.append(Rect(row[0], int(row[1]), int(row[2]), 0,0))
     return rectangles

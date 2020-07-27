@@ -25,14 +25,14 @@ def initial_solution(rectangle_list):
             while(solution_matrix[init_y][init_x] != 0):
                 init_y += 1
                 if(CURR_HEIGHT < init_y):
-                    solution_matrix[init_y] = [0] * MAX_WIDTH 
+                    solution_matrix.append([0] * MAX_WIDTH) 
                     CURR_HEIGHT += 1
             #now check the right side of rectangle isnt colliding
             init_x = init_x + rect.width
             while(solution_matrix[init_y][init_x - 1] != 0):
                 init_y += 1
                 if(CURR_HEIGHT < init_y):
-                    solution_matrix[init_y] = [0] * MAX_WIDTH 
+                    solution_matrix.append([0] * MAX_WIDTH) 
                     CURR_HEIGHT += 1
             #now we have a free space to draw the rect
             rect.xpos = init_x - rect.width
@@ -41,13 +41,10 @@ def initial_solution(rectangle_list):
             print("Rectangle " + str(rect.id) + "\n Coordinates: (" + str(rect.xpos) + ", " + str(rect.ypos) + ")")
             print(solution_matrix)
             for x in range(rect.width):
-                print("Checking at x position:  " + str(x))
                 for y in range(rect.height):
-                    print("checking at y position: " + str(y))
                     if (rect.ypos + y) > CURR_HEIGHT:
                         CURR_HEIGHT += 1
                         solution_matrix.append([0] * MAX_WIDTH) 
-                        print(solution_matrix)
                     solution_matrix[rect.ypos + y][rect.xpos + x] = rect.id
         return
 

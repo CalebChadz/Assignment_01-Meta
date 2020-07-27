@@ -25,7 +25,7 @@ def get_rectangles(file_name):
                 line_count += 1
             else:
                 # add the new rectangle, make sure correct types eg integer.
-                rectangles.append(Rect(row[0], int(row[1]), int(row[2]), 0,0))
+                rectangles.append(Rect(int(row[0]), int(row[1]), int(row[2]), 0,0))
     return rectangles
 
 #function to draw out the final solution to a window to be viewed.

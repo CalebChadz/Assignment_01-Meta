@@ -1,5 +1,6 @@
 import csv
 import sys
+import pathlib
 from array import *
 from Rectangle import *
 from graphics import *
@@ -7,7 +8,7 @@ from graphics import *
 # Global Variables
 MAX_WIDTH = 400
 CURR_HEIGHT = 0
-solution_height = 400
+solution_width = 400
 solution_matrix = [ [0] * MAX_WIDTH for i in range(1)]
 
 def initial_solution(rectangle_list):
@@ -38,15 +39,13 @@ def initial_solution(rectangle_list):
             rect.xpos = init_x - rect.width
             rect.ypos = init_y
             # fill in its matrix space
-            print("Rectangle " + str(rect.id) + "\n Coordinates: (" + str(rect.xpos) + ", " + str(rect.ypos) + ")")
-            print(solution_matrix)
             for x in range(rect.width):
                 for y in range(rect.height):
                     if (rect.ypos + y) > CURR_HEIGHT:
                         CURR_HEIGHT += 1
                         solution_matrix.append([0] * MAX_WIDTH) 
                     solution_matrix[rect.ypos + y][rect.xpos + x] = rect.id
-        return
+        return CURR_HEIGHT
 
 # Main method
 def main():
@@ -58,9 +57,8 @@ def main():
     rectangles = {}
     rectangles = get_rectangles(file_name)
     # Generate initial solution, represented as a list of boxes and thier coordinates.
-        
-    CURR_HEIGHT = initial_solution(rectangles)
-    print(solution_matrix)
+    solution_height = initial_solution(rectangles)
+    print("solution height: " + str(solution_height))
     # Draw out the final solution
-    draw_solution(rectangles, solution_height)  
+    draw_solution(rectangles, solution_width, solution_height)  
 main()

@@ -1,3 +1,5 @@
+# funciton that decodes the list representation of boxes to a matrix representation and gives
+# the rectangles coordinates on a plane.
 def GetSolution(rectangle_list, max_width):
     solution_matrix = [ [0] * max_width ]
     init_x = 0
@@ -32,8 +34,10 @@ def GetSolution(rectangle_list, max_width):
             for y in range(rect.height):
                 solution_matrix[rect.ypos + y][rect.xpos + x] = rect.id
         init_x += rect.width
+    # length of matrics directly corresponds to the solution height
     return (len(solution_matrix) - 1), solution_matrix 
 
+# function to see if it is time to change neighborhoods based on given solutions.
 def NeighborhoodChange(current_best, new_solution, curr_neighborhood):
     current_best_value, = GetSolution(current_best)
     new_solution_value, = GetSolution(new_solution)
@@ -43,3 +47,15 @@ def NeighborhoodChange(current_best, new_solution, curr_neighborhood):
         return new_solution, curr_neighborhood
     else:
         return current_best, (curr_neighborhood + 1)
+
+#functions to be implemented:
+
+# Shake, this will be the implementation of our neighborhood function to pull out a solution
+# Shake(x,k) where x is current solition, k is current neighborhood. So based on current neighborhood and its
+# neighborhood funciton, shake the solutiuon to a new solution.
+
+
+# BestImprovement, This will take the newly shaken solution and run Best improvement on all adjacent
+# neighbors. In essence run a local search. Apply the current neighborhood function once again but this time
+# on the new solution not on the current best solution, repeat for all neighbors and pick out the best
+

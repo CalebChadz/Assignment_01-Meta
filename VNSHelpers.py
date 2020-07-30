@@ -1,4 +1,4 @@
-def get_solution(rectangle_list, max_width):
+def GetSolution(rectangle_list, max_width):
     solution_matrix = [ [0] * max_width ]
     init_x = 0
     init_y = 0
@@ -33,3 +33,13 @@ def get_solution(rectangle_list, max_width):
                 solution_matrix[rect.ypos + y][rect.xpos + x] = rect.id
         init_x += rect.width
     return (len(solution_matrix) - 1), solution_matrix 
+
+def NeighborhoodChange(current_best, new_solution, curr_neighborhood):
+    current_best_value, = GetSolution(current_best)
+    new_solution_value, = GetSolution(new_solution)
+
+    if (new_solution_value < current_best_value):
+        curr_neighborhood = 1
+        return new_solution, curr_neighborhood
+    else:
+        return current_best, (curr_neighborhood + 1)

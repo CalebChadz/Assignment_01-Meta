@@ -1,7 +1,6 @@
 import csv
 from graphics import *
 
-scale = 2
 # A rectangle object to represent the rectangles in out problem.
 class Rect:
     def __init__(self, id, width, height, xpos, ypos):
@@ -11,11 +10,15 @@ class Rect:
         self.xpos = xpos
         self.ypos = ypos
 # Quickly print off this rectangles current values.
-    def print(self):
+    def Print(self):
         print("ID: " + str(self.id) + "\nDimensions: (" + str(self.width) + ", " + str(self.height) + ")" + "\nCoordinates: (" + str(self.xpos) + ", " + str(self.ypos) + ")")
-
+# Rotate the rectangle by switching width and height
+    def Rotate(self):
+        width = self.width
+        self.width = self.height
+        self.height = width
 # Function to read in a CSV file of rectangle dimensions to be stored as rectangle objects.
-def get_rectangles(file_name):
+def GetRectangles(file_name, scale):
     rectangles = []
     with open(file_name, 'r', encoding='utf-8-sig') as csv_file:
         reader = csv.reader(csv_file)
@@ -30,7 +33,7 @@ def get_rectangles(file_name):
     return rectangles
 
 #function to draw out the final solution to a window to be viewed.
-def draw_solution(solution, solution_width, solution_height):
+def DrawSolution(solution, solution_width, solution_height):
     win = GraphWin("Solution Window", solution_width, solution_height)
     # set background to black
     win.setBackground(color_rgb(150,200,210))

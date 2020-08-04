@@ -9,7 +9,7 @@ from NeighbourhoodFunctions import *
 from graphics import *
 
 # Global Variables
-scale = 4
+scale = 1
 MAX_NEIGHBORHOOD = 3
 given_solution_width = 0
 best_solution_matrix = [ [0] * given_solution_width ]
@@ -31,8 +31,11 @@ def main():
     # Parse in the csv to rectangle objects
     best_solution_list = GetRectangles(file_name, scale)
     best_solution_list.sort(key=takesize)
+    best_solution_list.reverse()
     # Generate initial solution, represented as a list of boxes and thier coordinates.
     best_solution_matrix = CalculateSolutionMatrix(best_solution_list, given_solution_width)
+    for line in best_solution_matrix:
+        print(line)
     solution_height = len(best_solution_matrix)
     print("Initial solution height: " + str(solution_height / scale))
     #begin basic neighbourhood search

@@ -12,18 +12,18 @@ def FlipOne(current_solution_list, index):
     current_solution_list[index].Rotate()
     return current_solution_list
 
-def MoveOne(current_solution_list, index):
-    random_index = random.randint(0, len(current_solution_list) - 1)
+def MoveOne(current_solution_list, index, indexx):
     rect = current_solution_list.pop(index)
-    current_solution_list.insert(random_index, rect)
+    current_solution_list.insert(indexx, rect)
     return current_solution_list
 
 def NeighborhoodGenerator(num_neighborhood, current_solution_list):
     neighborhood = []
-    if num_neighborhood == 2:
+    if num_neighborhood == 1:
         for rect in range(len(current_solution_list)):
             neighborhood.append(FlipOne(current_solution_list, rect))
-    elif num_neighborhood == 1:
+    elif num_neighborhood == 2:
         for rec in range(len(current_solution_list)):
-            neighborhood.append(MoveOne(current_solution_list, rec))
+            recc = 0
+            neighborhood.append(MoveOne(current_solution_list, rec, recc))
     return neighborhood

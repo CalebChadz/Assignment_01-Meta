@@ -8,11 +8,6 @@ def CalculateSolutionMatrix(rectangle_list, given_width):
     init_x = 0
     init_y = 0
     for rect in rectangle_list:
-        # always recalculate the starting height
-        init_y = 0
-        #check to see if this row is full, if yes start from left.
-        if (init_x + rect.width) > (given_width-1):
-            init_x = 0
         # check the bottom of rectangle is not colliding with any other rectangle for all side length
         ypos = 0
         while (ypos < rect.height):
@@ -21,11 +16,16 @@ def CalculateSolutionMatrix(rectangle_list, given_width):
             xpos = 0
             while (xpos < rect.width):
                 if (solution_matrix[init_y + ypos][init_x + xpos] != 0):
-                    init_y += 1
+                    init_x += 1
                     xpos = 0
                     ypos = 0
-                    if(len(solution_matrix) - 1 < init_y):
-                        solution_matrix.append([0] * given_width) 
+                if((init_x + rect.width) > (given_width-1)):
+                    init_x = 0
+                    init_y += 1 
+                    xpos = 0
+                    ypos = 0
+                if(len(solution_matrix) - 1 < init_y + ypos):
+                        solution_matrix.append([0] * given_width)
                 else:
                     xpos += 1
             ypos += 1
@@ -55,12 +55,13 @@ def NeighborhoodChange(current_best_list, current_best_matrix, new_list, new_mat
 # Shake(x,k) where x is current solition, k is current neighborhood. So based on current neighborhood and its
 # neighborhood funciton, shake the solutiuon to a new solution.
 def Shake(current_solution_list, current_neighbourhood):
-    if current_neighbourhood == 2:
+    if current_neighbourhood == 1:
         rand = random.randint(0, len(current_solution_list) - 1)
         current_solution_list = FlipOne(current_solution_list, rand)
-    elif current_neighbourhood == 1:
+    elif current_neighbourhood == 2:
         rand = random.randint(0, len(current_solution_list) - 1)
-        current_neighbourhood = MoveOne(current_solution_list, rand)
+        randd = random.randint(0, len(current_solution_list) - 1)
+        current_neighbourhood = MoveOne(current_solution_list, rand, randd)
     return current_solution_list
 
 # BestImprovement, This will take the newly shaken solution and run Best improvement on all adjacent
@@ -100,9 +101,12 @@ def BVNS(curr_solution, curr_matrix, max_neighborhood, max_time, given_width):
             new_solution_list = Shake(curr_solution, curr_neighborhood)
             new_solution_matrix = CalculateSolutionMatrix(new_solution_list, given_width)
             new_solution_height = len(new_solution_matrix)
+            #print("New Solution Height: " + str(new_solution_height / 4)) 
             # Best improvement the solution, local search
             newer_solution_list, newer_solution_matrix = BestImprovement(new_solution_list, new_solution_matrix, curr_neighborhood, given_width)
             newer_solution_height = len(newer_solution_matrix)
+            #print("New Solution Height: " + str(newer_solution_height / 4)) 
+
             # Change Neighborhoods.
             curr_solution_list, curr_solution_matrix, curr_neighborhood = NeighborhoodChange(curr_solution_list, curr_solution_matrix, newer_solution_list, newer_solution_matrix, curr_neighborhood)
     return curr_solution_list, curr_solution_matrix

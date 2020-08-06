@@ -10,6 +10,10 @@ def FlipHalf(rectangle_list):
 
 def FlipOne(current_solution_list, index):
     current_solution_list[index].Rotate()
+    if not current_solution_list[index].rotated:
+        current_solution_list[index].rotated = True
+    else:
+        current_solution_list[index].rotated = False
     return current_solution_list
 
 def MoveOne(current_solution_list, index, indexx):

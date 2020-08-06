@@ -1,14 +1,15 @@
 from NeighbourhoodFunctions import *
+from Rectangle import *
 import random
 
 # funciton that decodes the list representation of boxes to a matrix representation and gives
 # the rectangles coordinates on a plane.
-def CalculateSolutionMatrix(rectangle_list, given_width):
+def CalculateSolutionMatrix(rectangle_list, given_width, initial):
     solution_matrix = [ [0] * given_width ]
     init_x = 0
     init_y = 0
     for rect in rectangle_list:
-        if(rect.width < rect.height):
+        if rect.width < rect.height and initial:
             rect.Rotate()
         # check the bottom of rectangle is not colliding with any other rectangle for all side length
         ypos = 0
@@ -76,17 +77,16 @@ def BestImprovement(new_solution_list, new_solution_matrix, current_neighbourhoo
     current_solution_matrix = new_solution_matrix
     found_new = True
 
-    while(found_new):
+    while found_new:
         found_new = False
         neighbors = NeighborhoodGenerator(current_neighbourhood, current_solution_list)
         for neighbor_list in neighbors:
-            neighbor_matrix = CalculateSolutionMatrix(neighbor_list, given_width)
+            neighbor_matrix = CalculateSolutionMatrix(neighbor_list, given_width, False)
             if len(neighbor_matrix) < len(current_solution_matrix):
                 current_solution_matrix = neighbor_matrix
                 current_solution_list = neighbor_list
                 found_new = True
     return current_solution_list, current_solution_matrix
-
 
 # BVNS framework
 # Basic Variable Neighborhood Search strucure.
@@ -101,15 +101,20 @@ def BVNS(curr_solution, curr_matrix, max_neighborhood, max_time, given_width):
         curr_neighborhood = 1
         while(curr_neighborhood != max_neighborhood):
             # Shake the solution
-            new_solution_list = Shake(curr_solution, curr_neighborhood)
-            new_solution_matrix = CalculateSolutionMatrix(new_solution_list, given_width)
+            new_solution_list = Shake(curr_solution_list, curr_neighborhood)
+            new_solution_matrix = CalculateSolutionMatrix(new_solution_list, given_width, False)
             new_solution_height = len(new_solution_matrix)
-            #print("New Solution Height: " + str(new_solution_height / 4)) 
+            #print("Shaken solution height: " + str(new_solution_height))
+            #DrawSolution(new_solution_list, given_width, new_solution_height)
+            
             # Best improvement the solution, local search
             newer_solution_list, newer_solution_matrix = BestImprovement(new_solution_list, new_solution_matrix, curr_neighborhood, given_width)
             newer_solution_height = len(newer_solution_matrix)
-            #print("New Solution Height: " + str(newer_solution_height / 4)) 
-
+            #print("Best Improvement solution height: " + str(newer_solution_height))
+            #DrawSolution(new_solution_list, given_width, new_solution_height)
+            
             # Change Neighborhoods.
             curr_solution_list, curr_solution_matrix, curr_neighborhood = NeighborhoodChange(curr_solution_list, curr_solution_matrix, newer_solution_list, newer_solution_matrix, curr_neighborhood)
+            print("Current Best solution height: " + str(len(curr_solution_matrix)))
+    
     return curr_solution_list, curr_solution_matrix

@@ -9,6 +9,7 @@ class Rect:
         self.height = height
         self.xpos = xpos
         self.ypos = ypos
+        self.rotated = False
 # Quickly print off this rectangles current values.
     def Print(self):
         print("ID: " + str(self.id) + "\nDimensions: (" + str(self.width) + ", " + str(self.height) + ")" + "\nCoordinates: (" + str(self.xpos) + ", " + str(self.ypos) + ")")
@@ -44,7 +45,10 @@ def DrawSolution(solution, solution_width, solution_height):
         pt2 = Point((r.xpos + r.width), (r.ypos + r.height))
         rect_draw  = Rectangle(pt1, pt2)
         # set the outline color
-        rect_draw.setFill(color_rgb(199,0,57))
+        if r.rotated:
+            rect_draw.setFill(color_rgb(0,255,0))
+        else:
+            rect_draw.setFill(color_rgb(199,0,57))
         # draw it to the window
         rect_draw.draw(win)
     # wait for a click then close the program

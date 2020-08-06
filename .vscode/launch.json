@@ -11,8 +11,8 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "args" : [
-                "M1a.csv",
-                "40"
+                "M3d.csv",
+                "100"
             ]
         }
     ]

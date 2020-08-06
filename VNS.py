@@ -9,7 +9,7 @@ from NeighbourhoodFunctions import *
 from graphics import *
 
 # Global Variables
-scale = 10
+scale = 2
 MAX_NEIGHBORHOOD = 2
 given_solution_width = 0
 best_solution_matrix = [ [0] * given_solution_width ]

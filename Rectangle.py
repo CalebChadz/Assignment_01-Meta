@@ -34,7 +34,7 @@ def GetRectangles(file_name, scale):
 
 #function to draw out the final solution to a window to be viewed.
 def DrawSolution(solution, solution_width, solution_height):
-    win = GraphWin("Solution Window", solution_width, solution_height)
+    win = GraphWin("Solution Window", solution_width, solution_height + 1)
     # set background to black
     win.setBackground(color_rgb(150,200,210))
     # For each rectangle in the list

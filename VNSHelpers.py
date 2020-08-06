@@ -8,6 +8,8 @@ def CalculateSolutionMatrix(rectangle_list, given_width):
     init_x = 0
     init_y = 0
     for rect in rectangle_list:
+        if(rect.width < rect.height):
+            rect.Rotate()
         # check the bottom of rectangle is not colliding with any other rectangle for all side length
         ypos = 0
         while (ypos < rect.height):
@@ -36,7 +38,8 @@ def CalculateSolutionMatrix(rectangle_list, given_width):
         for x in range(rect.width):
             for y in range(rect.height):
                 solution_matrix[rect.ypos + y][rect.xpos + x] = rect.id
-        init_x += rect.width
+        init_x = 0
+        init_y = 0
     # length of matrics directly corresponds to the solution height
     return solution_matrix
 

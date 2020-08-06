@@ -14,7 +14,7 @@ def CalculateSolutionMatrix(rectangle_list, given_width, initial):
         # check the bottom of rectangle is not colliding with any other rectangle for all side length
         ypos = 0
         while (ypos < rect.height):
-            if(len(solution_matrix) - 1 < init_y + ypos):
+            if(len(solution_matrix) <= init_y + ypos):
                         solution_matrix.append([0] * given_width)
             xpos = 0
             while (xpos < rect.width):
@@ -22,15 +22,16 @@ def CalculateSolutionMatrix(rectangle_list, given_width, initial):
                     init_x += 1
                     xpos = 0
                     ypos = 0
-                if((init_x + rect.width) > (given_width-1)):
+                else:
+                    xpos += 1
+                    
+                if((init_x + rect.width) > (given_width)):
                     init_x = 0
                     init_y += 1 
                     xpos = 0
                     ypos = 0
-                if(len(solution_matrix) - 1 < init_y + ypos):
+                    if(len(solution_matrix) - 1 < init_y + ypos):
                         solution_matrix.append([0] * given_width)
-                else:
-                    xpos += 1
             ypos += 1
         #now we have a free space to draw the rect
         rect.xpos = init_x 

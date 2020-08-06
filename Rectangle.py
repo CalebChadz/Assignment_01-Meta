@@ -19,7 +19,7 @@ class Rect:
         self.width = self.height
         self.height = width
 # Function to read in a CSV file of rectangle dimensions to be stored as rectangle objects.
-def GetRectangles(file_name, scale):
+def GetRectangles(file_name):
     rectangles = []
     with open(file_name, 'r', encoding='utf-8-sig') as csv_file:
         reader = csv.reader(csv_file)
@@ -30,19 +30,25 @@ def GetRectangles(file_name, scale):
                 line_count += 1
             else:
                 # add the new rectangle, make sure correct types eg integer.
-                rectangles.append(Rect(int(row[0]), int(row[1]) * scale, int(row[2]) * scale, 0,0))
+                rectangles.append(Rect(int(row[0]), int(row[1]), int(row[2]), 0,0))
     return rectangles
 
 #function to draw out the final solution to a window to be viewed.
-def DrawSolution(solution, solution_width, solution_height):
-    win = GraphWin("Solution Window", solution_width, solution_height + 1)
+def DrawSolution(solution, solution_width, solution_height, scale):
+    solution_width = solution_width * scale
+    solution_height = solution_height * scale
+    win = GraphWin("Solution Window", solution_width, solution_height)
     # set background to black
     win.setBackground(color_rgb(150,200,210))
     # For each rectangle in the list
     for r in solution:
+        rHeight = r.height * scale
+        rWidth = r.width * scale
+        rX = r.xpos * scale
+        rY = r.ypos * scale
         #get the position of this rectangle and create a drawable.
-        pt1 = Point(r.xpos, r.ypos)
-        pt2 = Point((r.xpos + r.width), (r.ypos + r.height))
+        pt1 = Point(rX, rY)
+        pt2 = Point((rX + rWidth), (rY + rHeight))
         rect_draw  = Rectangle(pt1, pt2)
         # set the outline color
         if r.rotated:

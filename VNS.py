@@ -9,8 +9,8 @@ from NeighbourhoodFunctions import *
 from graphics import *
 
 # Global Variables
-scale = 2
-MAX_NEIGHBORHOOD = 2
+scale = 1
+MAX_NEIGHBORHOOD = 3
 given_solution_width = 0
 best_solution_matrix = [ [0] * given_solution_width ]
 best_solution_list = {}

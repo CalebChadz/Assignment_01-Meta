@@ -10,6 +10,8 @@ class Rect:
         self.xpos = xpos
         self.ypos = ypos
         self.rotated = False
+        self.swapped = False
+        self.moved = False
 # Quickly print off this rectangles current values.
     def Print(self):
         print("ID: " + str(self.id) + "\nDimensions: (" + str(self.width) + ", " + str(self.height) + ")" + "\nCoordinates: (" + str(self.xpos) + ", " + str(self.ypos) + ")")
@@ -37,7 +39,7 @@ def GetRectangles(file_name):
 def DrawSolution(solution, solution_width, solution_height, scale):
     solution_width = solution_width * scale
     solution_height = solution_height * scale
-    win = GraphWin("Solution Window", solution_width, solution_height)
+    win = GraphWin("Solution Window", solution_width, solution_height + 100)
     # set background to black
     win.setBackground(color_rgb(150,200,210))
     # For each rectangle in the list
@@ -53,6 +55,10 @@ def DrawSolution(solution, solution_width, solution_height, scale):
         # set the outline color
         if r.rotated:
             rect_draw.setFill(color_rgb(0,255,0))
+        elif r.moved:
+            rect_draw.setFill(color_rgb(0,0,255))
+        elif r.moved and r.rotated:
+            rect_draw.setFill(color_rgb(0,255,255))
         else:
             rect_draw.setFill(color_rgb(199,0,57))
         # draw it to the window

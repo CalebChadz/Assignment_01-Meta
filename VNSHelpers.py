@@ -66,6 +66,7 @@ def Shake(current_solution_list, current_neighbourhood):
     elif current_neighbourhood == 2:
         rand = random.randint(0, len(current_solution_list) - 1)
         randd = random.randint(0, len(current_solution_list) - 1)
+        #print(str(rand) + " " + str(randd))
         current_neighbourhood = MoveOne(current_solution_list, rand, randd)
     return current_solution_list
 
@@ -106,13 +107,13 @@ def BVNS(curr_solution, curr_matrix, max_neighborhood, max_time, given_width):
             new_solution_matrix = CalculateSolutionMatrix(new_solution_list, given_width, False)
             new_solution_height = len(new_solution_matrix)
             #print("Shaken solution height: " + str(new_solution_height))
-            #DrawSolution(new_solution_list, given_width, new_solution_height)
+            #DrawSolution(new_solution_list, given_width, new_solution_height, 6)
             
             # Best improvement the solution, local search
             newer_solution_list, newer_solution_matrix = BestImprovement(new_solution_list, new_solution_matrix, curr_neighborhood, given_width)
             newer_solution_height = len(newer_solution_matrix)
             #print("Best Improvement solution height: " + str(newer_solution_height))
-            #DrawSolution(new_solution_list, given_width, new_solution_height)
+            #DrawSolution(new_solution_list, given_width, new_solution_height, 1)
             
             # Change Neighborhoods.
             curr_solution_list, curr_solution_matrix, curr_neighborhood = NeighborhoodChange(curr_solution_list, curr_solution_matrix, newer_solution_list, newer_solution_matrix, curr_neighborhood)

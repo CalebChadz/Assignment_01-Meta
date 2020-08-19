@@ -1,0 +1,301 @@
+
+ID: 66
+Dimensions: (9, 9)
+Coordinates: (0, 0)
+ID: 27
+Dimensions: (9, 9)
+Coordinates: (9, 0)
+ID: 22
+Dimensions: (9, 9)
+Coordinates: (18, 0)
+ID: 89
+Dimensions: (8, 8)
+Coordinates: (27, 0)
+ID: 26
+Dimensions: (8, 8)
+Coordinates: (27, 8)
+ID: 19
+Dimensions: (8, 8)
+Coordinates: (0, 9)
+ID: 53
+Dimensions: (9, 7)
+Coordinates: (8, 9)
+ID: 85
+Dimensions: (8, 7)
+Coordinates: (17, 9)
+ID: 34
+Dimensions: (7, 8)
+Coordinates: (8, 16)
+ID: 21
+Dimensions: (8, 7)
+Coordinates: (15, 16)
+ID: 5
+Dimensions: (7, 8)
+Coordinates: (23, 16)
+ID: 93
+Dimensions: (7, 7)
+Coordinates: (30, 16)
+ID: 61
+Dimensions: (7, 7)
+Coordinates: (0, 17)
+ID: 78
+Dimensions: (8, 6)
+Coordinates: (15, 23)
+ID: 55
+Dimensions: (6, 8)
+Coordinates: (30, 23)
+ID: 100
+Dimensions: (9, 5)
+Coordinates: (0, 24)
+ID: 75
+Dimensions: (5, 9)
+Coordinates: (35, 0)
+ID: 44
+Dimensions: (9, 5)
+Coordinates: (0, 29)
+ID: 37
+Dimensions: (9, 5)
+Coordinates: (9, 29)
+ID: 11
+Dimensions: (9, 5)
+Coordinates: (18, 29)
+ID: 86
+Dimensions: (7, 6)
+Coordinates: (27, 31)
+ID: 40
+Dimensions: (6, 7)
+Coordinates: (34, 31)
+ID: 33
+Dimensions: (7, 6)
+Coordinates: (0, 34)
+ID: 57
+Dimensions: (5, 8)
+Coordinates: (7, 34)
+ID: 15
+Dimensions: (6, 6)
+Coordinates: (12, 34)
+ID: 4
+Dimensions: (4, 9)
+Coordinates: (18, 34)
+ID: 62
+Dimensions: (7, 5)
+Coordinates: (23, 24)
+ID: 72
+Dimensions: (6, 7)
+Coordinates: (22, 37)
+ID: 48
+Dimensions: (5, 7)
+Coordinates: (35, 9)
+ID: 36
+Dimensions: (7, 5)
+Coordinates: (28, 38)
+ID: 7
+Dimensions: (5, 7)
+Coordinates: (35, 38)
+ID: 74
+Dimensions: (4, 8)
+Coordinates: (36, 23)
+ID: 43
+Dimensions: (8, 4)
+Coordinates: (0, 42)
+ID: 98
+Dimensions: (5, 6)
+Coordinates: (12, 40)
+ID: 64
+Dimensions: (6, 5)
+Coordinates: (9, 24)
+ID: 14
+Dimensions: (6, 5)
+Coordinates: (28, 43)
+ID: 3
+Dimensions: (5, 6)
+Coordinates: (17, 43)
+ID: 45
+Dimensions: (4, 7)
+Coordinates: (8, 42)
+ID: 82
+Dimensions: (9, 3)
+Coordinates: (22, 48)
+ID: 71
+Dimensions: (3, 9)
+Coordinates: (34, 45)
+ID: 69
+Dimensions: (8, 3)
+Coordinates: (0, 46)
+ID: 41
+Dimensions: (6, 4)
+Coordinates: (22, 44)
+ID: 39
+Dimensions: (4, 6)
+Coordinates: (12, 46)
+ID: 28
+Dimensions: (6, 4)
+Coordinates: (0, 49)
+ID: 96
+Dimensions: (3, 7)
+Coordinates: (37, 16)
+ID: 51
+Dimensions: (3, 7)
+Coordinates: (37, 45)
+ID: 68
+Dimensions: (4, 5)
+Coordinates: (6, 49)
+ID: 67
+Dimensions: (4, 5)
+Coordinates: (16, 49)
+ID: 17
+Dimensions: (5, 4)
+Coordinates: (20, 51)
+ID: 60
+Dimensions: (6, 3)
+Coordinates: (25, 51)
+ID: 50
+Dimensions: (9, 2)
+Coordinates: (0, 54)
+ID: 49
+Dimensions: (2, 9)
+Coordinates: (31, 48)
+ID: 80
+Dimensions: (2, 8)
+Coordinates: (10, 49)
+ID: 54
+Dimensions: (8, 2)
+Coordinates: (12, 54)
+ID: 25
+Dimensions: (8, 2)
+Coordinates: (20, 55)
+ID: 6
+Dimensions: (2, 8)
+Coordinates: (37, 52)
+ID: 2
+Dimensions: (8, 2)
+Coordinates: (0, 56)
+ID: 70
+Dimensions: (5, 3)
+Coordinates: (22, 34)
+ID: 24
+Dimensions: (5, 3)
+Coordinates: (12, 56)
+ID: 20
+Dimensions: (5, 3)
+Coordinates: (17, 57)
+ID: 84
+Dimensions: (7, 2)
+Coordinates: (0, 40)
+ID: 73
+Dimensions: (7, 2)
+Coordinates: (22, 57)
+ID: 99
+Dimensions: (2, 6)
+Coordinates: (25, 9)
+ID: 97
+Dimensions: (4, 3)
+Coordinates: (33, 54)
+ID: 83
+Dimensions: (4, 3)
+Coordinates: (8, 57)
+ID: 79
+Dimensions: (6, 2)
+Coordinates: (29, 57)
+ID: 46
+Dimensions: (2, 6)
+Coordinates: (35, 57)
+ID: 16
+Dimensions: (2, 6)
+Coordinates: (0, 58)
+ID: 92
+Dimensions: (2, 5)
+Coordinates: (2, 58)
+ID: 59
+Dimensions: (7, 4)
+Coordinates: (22, 59)
+ID: 77
+Dimensions: (5, 2)
+Coordinates: (12, 59)
+ID: 58
+Dimensions: (5, 2)
+Coordinates: (29, 59)
+ID: 35
+Dimensions: (5, 2)
+Coordinates: (4, 60)
+ID: 23
+Dimensions: (5, 2)
+Coordinates: (17, 60)
+ID: 32
+Dimensions: (3, 3)
+Coordinates: (28, 54)
+ID: 29
+Dimensions: (3, 3)
+Coordinates: (9, 60)
+ID: 95
+Dimensions: (4, 2)
+Coordinates: (12, 52)
+ID: 63
+Dimensions: (2, 4)
+Coordinates: (37, 60)
+ID: 81
+Dimensions: (7, 1)
+Coordinates: (12, 62)
+ID: 38
+Dimensions: (1, 7)
+Coordinates: (7, 17)
+ID: 31
+Dimensions: (7, 1)
+Coordinates: (2, 63)
+ID: 87
+Dimensions: (2, 3)
+Coordinates: (29, 61)
+ID: 76
+Dimensions: (6, 1)
+Coordinates: (28, 37)
+ID: 42
+Dimensions: (2, 3)
+Coordinates: (31, 61)
+ID: 18
+Dimensions: (1, 6)
+Coordinates: (33, 48)
+ID: 1
+Dimensions: (1, 6)
+Coordinates: (39, 52)
+ID: 94
+Dimensions: (5, 1)
+Coordinates: (0, 53)
+ID: 91
+Dimensions: (5, 1)
+Coordinates: (12, 61)
+ID: 47
+Dimensions: (5, 1)
+Coordinates: (4, 62)
+ID: 90
+Dimensions: (2, 2)
+Coordinates: (27, 29)
+ID: 65
+Dimensions: (4, 1)
+Coordinates: (4, 58)
+ID: 56
+Dimensions: (2, 2)
+Coordinates: (20, 49)
+ID: 52
+Dimensions: (4, 1)
+Coordinates: (4, 59)
+ID: 30
+Dimensions: (4, 1)
+Coordinates: (9, 63)
+ID: 13
+Dimensions: (4, 1)
+Coordinates: (13, 63)
+ID: 10
+Dimensions: (2, 2)
+Coordinates: (33, 61)
+ID: 9
+Dimensions: (4, 1)
+Coordinates: (17, 63)
+ID: 8
+Dimensions: (1, 3)
+Coordinates: (17, 40)
+ID: 12
+Dimensions: (2, 1)
+Coordinates: (25, 15)
+ID: 88
+Dimensions: (1, 1)
+Coordinates: (29, 29)

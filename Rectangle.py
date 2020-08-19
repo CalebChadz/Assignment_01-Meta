@@ -78,7 +78,7 @@ class Rect:
         self.moved = False
 # Quickly print off this rectangles current values.
     def Print(self):
-        print("ID: " + str(self.id) + "\nDimensions: (" + str(self.width) + ", " + str(self.height) + ")" + "\nCoordinates: (" + str(self.xpos) + ", " + str(self.ypos) + ")")
+        return ("\nID: " + str(self.id) + "\nDimensions: (" + str(self.width) + ", " + str(self.height) + ")" + "\nCoordinates: (" + str(self.xpos) + ", " + str(self.ypos) + ")")
 # Rotate the rectangle by switching width and height
     def Rotate(self):
         width = self.width

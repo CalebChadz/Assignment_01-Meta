@@ -7,11 +7,12 @@ def FlipOne(current_solution_list, index):
     temp_solution_list[index].Rotate()
     return temp_solution_list
 
-def MoveOne(current_solution_list):
+def MoveOne(current_solution_list, index):
     tmp_solution_list = copy.deepcopy(current_solution_list)
-    rand1 = random.randint(0,len(tmp_solution_list) - 1)
-    rand2 = random.randint(0,len(tmp_solution_list) - 1)
-    rect = tmp_solution_list.pop(rand1)
+    length = len(tmp_solution_list) - 1
+    rand1 = random.randint(0,length)
+    rand2 = random.randint(0,length)
+    rect = tmp_solution_list.pop(index)
     tmp_solution_list.insert(rand2, rect)
     return tmp_solution_list
 
@@ -32,7 +33,7 @@ def FlipTenPercent(current_solution_list, rand_list):
 def genertateRandomList(current_solution_list):
     length = len(current_solution_list)
     rand_list = []
-    for i in range(int(length * 0.2)):
+    for i in range(int(length * 0.15)):
         rand_list.append(random.randint(0, length -1))
     return rand_list
 
@@ -44,13 +45,13 @@ def NeighborhoodGenerator(num_neighborhood, current_solution_list):
             neighborhood.append(FlipOne(current_solution_list, rect))
     elif num_neighborhood == 3:
         for rec in range(int(len(current_solution_list) * 0.5)):
-            neighborhood.append(MoveOne(current_solution_list))
+            neighborhood.append(MoveOne(current_solution_list, rec))
     elif num_neighborhood == 2:
-            for rec in range(ilen(current_solution_list) * 0.1)):
-                rand_list = genertateRandomList(current_nt(solution_list)
-                neighborhood.append(MoveTenPercent(current_solution_list, rand_list))
+        for rec in range(int(len(current_solution_list) * 0.1)):
+            rand_list = genertateRandomList(current_solution_list)
+            neighborhood.append(MoveTenPercent(current_solution_list, rand_list))
     elif num_neighborhood == 1:
-            for rec in range(int(len(current_solution_list) * 0.1)):
-                rand_list = genertateRandomList(current_solution_list)
-                neighborhood.append(FlipTenPercent(current_solution_list, rand_list))
+        for rec in range(int(len(current_solution_list) * 0.1)):
+            rand_list = genertateRandomList(current_solution_list)
+            neighborhood.append(FlipTenPercent(current_solution_list, rand_list))
     return neighborhood

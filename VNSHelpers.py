@@ -27,7 +27,7 @@ def Shake(current_solution_list, current_neighbourhood):
         tmp_solution_list = FlipOne(tmp_solution_list, rand)
         print("Shake Function FlipOne")
     elif current_neighbourhood == 3:
-        tmp_solution_list = MoveOne(tmp_solution_list)
+        tmp_solution_list = MoveOne(tmp_solution_list, random.randint(0,len(tmp_solution_list) -1))
         print("Shake Function MoveOne")
     elif current_neighbourhood == 2:
         rand_list = []

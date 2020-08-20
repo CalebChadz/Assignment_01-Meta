@@ -10,8 +10,8 @@ from graphics import *
 
 # Global Variables
 scale = 2
-MAX_NEIGHBORHOOD = 4
-MAX_TIME = 0
+MAX_NEIGHBORHOOD = 2
+MAX_TIME = 60
 given_solution_width = 0
 current_neighbourhood = 1
 initial_solution = None
@@ -34,13 +34,13 @@ def main():
     best_solution_list.reverse()
     # Generate initial solution, represented as a list of boxes and thier coordinates.
     initial_solution = Solution(best_solution_list, given_solution_width, True)
-    print ("Initial Solution Height: " + str(initial_solution.height))
-    initial_solution.drawSolution(scale)
+    print ("Initial Solution Height: " + str(initial_solution.drawHeight))
+    #initial_solution.drawSolution(scale)
     
     # BVNS tim
     start = time.time()
-    searched_solution = VNDS(initial_solution, MAX_NEIGHBORHOOD, MAX_TIME)
-    print("Final found solution height: " + str(searched_solution.height) + " Found in time: " + str(time.time() - start))
+    searched_solution, timey = BVNS(initial_solution, MAX_NEIGHBORHOOD, MAX_TIME)
+    print("Final found solution height: " + str(searched_solution.drawHeight) + " Found in time: " + str(timey))
     file_solution = open("solution_" + file_name.strip('.csv') + ".txt", "w")
     for rect in searched_solution.rectangle_list:
         file_solution.write(rect.Print())

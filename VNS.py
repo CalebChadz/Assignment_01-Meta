@@ -11,7 +11,7 @@ from graphics import *
 # Global Variables
 scale = 2
 MAX_NEIGHBORHOOD = 4
-MAX_TIME = 60
+MAX_TIME = 0
 given_solution_width = 0
 current_neighbourhood = 1
 initial_solution = None
@@ -37,9 +37,10 @@ def main():
     print ("Initial Solution Height: " + str(initial_solution.height))
     initial_solution.drawSolution(scale)
     
-    # BVNS time
-    searched_solution = BVNS(initial_solution, MAX_NEIGHBORHOOD, MAX_TIME)
-    print("Final found solution height: " + str(searched_solution.height))
+    # BVNS tim
+    start = time.time()
+    searched_solution = VNDS(initial_solution, MAX_NEIGHBORHOOD, MAX_TIME)
+    print("Final found solution height: " + str(searched_solution.height) + " Found in time: " + str(time.time() - start))
     file_solution = open("solution_" + file_name.strip('.csv') + ".txt", "w")
     for rect in searched_solution.rectangle_list:
         file_solution.write(rect.Print())

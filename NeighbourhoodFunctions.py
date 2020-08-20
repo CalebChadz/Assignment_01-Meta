@@ -5,7 +5,6 @@ from Rectangle import *
 def takesize(elm):
     return(elm.height)
 
-
 def FlipOne(current_solution_list, index):
     temp_solution_list = copy.deepcopy(current_solution_list)
     temp_solution_list[index].Rotate()
@@ -37,7 +36,7 @@ def FlipTenPercent(current_solution_list, rand_list):
     tmp_solution_list.sort(key=takesize)
     tmp_solution_list.reverse()
     return tmp_solution_list
-    
+
 def genertateRandomList(current_solution_list):
     length = len(current_solution_list)
     rand_list = []
@@ -45,16 +44,15 @@ def genertateRandomList(current_solution_list):
         rand_list.append(random.randint(0, length -1))
     return rand_list
 
-
 def NeighborhoodGenerator(num_neighborhood, current_solution_list):
     neighborhood = []
     if num_neighborhood == 2:
         for rect in range(len(current_solution_list)):
             neighborhood.append(FlipOne(current_solution_list, rect))
-    elif num_neighborhood == 3:
+    elif num_neighborhood == 4:
         for rec in range(int(len(current_solution_list) * 0.5)):
             neighborhood.append(MoveOne(current_solution_list, rec))
-    elif num_neighborhood == 4:
+    elif num_neighborhood == 3:
         for rec in range(int(len(current_solution_list) * 0.1)):
             rand_list = genertateRandomList(current_solution_list)
             neighborhood.append(MoveTenPercent(current_solution_list, rand_list))

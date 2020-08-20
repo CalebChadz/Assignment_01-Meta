@@ -16,7 +16,7 @@ def CalculateRectanglePositions(rectangle_list, given_width, initial):
     init_y = 0
     for rect in rectangle_list:
         #if rect.width < rect.height and initial:
-            # rect.Rotate()
+            #rect.Rotate()
         # check the bottom of rectangle is not colliding with any other rectangle for all side length
         ypos = 0
         while (ypos < rect.height):
@@ -52,18 +52,18 @@ def CalculateRectanglePositions(rectangle_list, given_width, initial):
                 solution_matrix[rect.ypos + y][rect.xpos + x] = rect.id
         init_x = 0
         init_y = 0
-    height = 0
+    value = 0
     for y in range(len(solution_matrix)):
         for x in range(given_width):
             if solution_matrix[y][x] == 0:
-                height += 1
-    if height == given_width:
-        height = 0
+                value += 1
+    if value == given_width:
+        value = 0
         for i in range(given_width):
             if not solution_matrix[len(solution_matrix) - 1][i] == 0:
-                height += 1
+                value += 1
     # length of matrics directly corresponds to the solution height
-    return rectangle_list, height, len(solution_matrix)
+    return rectangle_list, value, len(solution_matrix)
 
 
 # A rectangle object to represent the rectangles in out problem.

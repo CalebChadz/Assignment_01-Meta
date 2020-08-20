@@ -26,10 +26,10 @@ def Shake(current_solution_list, current_neighbourhood):
         rand = random.randint(0, len(tmp_solution_list) - 1)
         tmp_solution_list = FlipOne(tmp_solution_list, rand)
         print("Shake Function FlipOne")
-    elif current_neighbourhood == 3:
+    elif current_neighbourhood == 4:
         tmp_solution_list = MoveOne(tmp_solution_list, random.randint(0,len(tmp_solution_list) -1))
         print("Shake Function MoveOne")
-    elif current_neighbourhood == 4:
+    elif current_neighbourhood == 3:
         rand_list = []
         length = len(tmp_solution_list)
         for i in range(int(length * 0.1)):
@@ -62,6 +62,10 @@ def BestImprovement(new_solution, current_neighbourhood):
                 found_new = True
     return current_solution
 
+# FirstImprovement, This will take the newly shaken solution and run First improvement on all adjacent
+# neighbors. In essence run a local search. Apply the current neighborhood function once again but this time
+# on the new solution not on the current best solution, repeat for all neighbors and pick out the first solution
+# that makes an improvement.
 def FirstImprovement(new_solution, current_neighbourhood):
     current_solution = copy.deepcopy(new_solution)
     found_new = True
@@ -77,6 +81,45 @@ def FirstImprovement(new_solution, current_neighbourhood):
                 return current_solution
         return current_solution
 
+def VND(solution, max_neighborhood):
+    curr_solution = copy.deepcopy(solution)
+    curr_neighborhood = 1
+    while curr_neighborhood <= max_neighborhood:
+        neighbors = NeighborhoodGenerator(curr_neighborhood, curr_solution.rectangle_list)
+        best_neighbor = Solution(neighbors[0], solution.given_width, False)
+        for neighbor_list in neighbors:
+            neighbor_solution = Solution(neighbor_list, solution.given_width, False)
+            if neighbor_solution.drawHeight <= best_neighbor.drawHeight:
+                best_neighbor = neighbor_solution
+        curr_solution, curr_neighborhood = NeighborhoodChange(curr_solution, best_neighbor, curr_neighborhood)
+        print("Current Best solution height: " + str(curr_solution.drawHeight))
+        if curr_solution.height == 0:
+            return curr_solution
+    return curr_solution
+
+#RVNS framework
+#Reduced Variable Neighborhood Search Structure
+def RVNS(solution, max_neighborhood, max_time):
+    curr_solution = copy.deepcopy(solution)
+    # get starting time
+    start = time.time()
+    # begin algorithm execution, while there is time left.
+    while ((time.time() - start) < max_time):
+        curr_neighborhood = 1
+        while(curr_neighborhood <= max_neighborhood):
+        # Shake the solution
+            new_solution_list = Shake(curr_solution.rectangle_list, curr_neighborhood)
+            new_solution = Solution(new_solution_list, solution.given_width, False)
+            new_solution_height = new_solution.drawHeight
+            print("Shaken solution height: " + str(new_solution_height))
+        
+            # Change Neighborhoods.
+            curr_solution, curr_neighborhood = NeighborhoodChange(curr_solution, new_solution, curr_neighborhood)
+            print("Current Best solution height: " + str(curr_solution.drawHeight))
+            if curr_solution.height == 0:
+                return curr_solution
+    return curr_solution
+
 # BVNS framework
 # Basic Variable Neighborhood Search strucure.
 def BVNS(solution, max_neighborhood, max_time):
@@ -85,7 +128,6 @@ def BVNS(solution, max_neighborhood, max_time):
     timey = None
     # get starting time
     start = time.time()
-    curr_neighborhood = 1
     # begin algorithm execution, while there is time left.
     while ((time.time() - start) < max_time):
         curr_neighborhood = 1
@@ -94,57 +136,46 @@ def BVNS(solution, max_neighborhood, max_time):
             new_solution_list = Shake(curr_solution.rectangle_list, curr_neighborhood)
             new_solution = Solution(new_solution_list, solution.given_width, False)
             new_solution_height = new_solution.drawHeight
-            if new_solution.height == 0:
-                return new_solution, 
-            if new_solution.drawHeight < currBestHeight:
-                timey = time.time() - start
-            print("Shaken solution height: " + str(new_solution_height) + " Found in : " + str(time.time() - start))
+            print("Shaken solution height: " + str(new_solution_height))
             # new_solution.drawSolution(10)
-            
+
             # Best improvement the solution, local search
             newer_solution = BestImprovement(new_solution, curr_neighborhood)
-            if newer_solution.height == 0:
-                return newer_solution
-            if new_solution.drawHeight < currBestHeight:
-                timey = time.time() - start
             newer_solution_height = newer_solution.drawHeight
-            print("Best Improvement solution height: " + str(newer_solution_height)+ " Found in : " + str(time.time() - start))
+            print("Best Improvement solution height: " + str(newer_solution_height))
             # newer_solution.drawSolution(10)
-            
+
             # Change Neighborhoods.
             curr_solution, curr_neighborhood = NeighborhoodChange(curr_solution, newer_solution, curr_neighborhood)
-            print("Current Best solution height: " + str(curr_solution.drawHeight) + " Found in : " + str(time.time() - start))
-    return curr_solution, timey
+            print("Current Best solution height: " + str(curr_solution.drawHeight))
+            if curr_solution.height == 0:
+                return curr_solution
+    return curr_solution
 
-def VNDS(solution, max_neighborhood, max_time):
+def GVNS(solution, max_neighborhood, max_time):
     curr_solution = copy.deepcopy(solution)
     # get starting time
     start = time.time()
-    curr_neighborhood = 1
     # begin algorithm execution, while there is time left.
-    #while ((time.time() - start) < max_time):
-    curr_neighborhood = 1
-    while(curr_neighborhood <= max_neighborhood):
-        # Shake the solution
-        new_solution_list = Shake(curr_solution.rectangle_list, curr_neighborhood)
-        new_solution = Solution(new_solution_list, solution.given_width, False)
-        new_solution_height = new_solution.height
-        print("Shaken solution height: " + str(new_solution_height))
-        # new_solution.drawSolution(10)
-        
-        # BVNS
-        newa_solution = BVNS(new_solution, max_neighborhood, max_time)
-        newa_solution_height = newa_solution.height
-        print("BVNS solution height: " + str(newa_solution_height))       
+    while ((time.time() - start) < max_time):
+        curr_neighborhood = 1
+        while(curr_neighborhood <= max_neighborhood):
+            # Shake the solution
+            new_solution_list = Shake(curr_solution.rectangle_list, curr_neighborhood)
+            new_solution = Solution(new_solution_list, solution.given_width, False)
+            new_solution_height = new_solution.drawHeight
+            print("Shaken solution height: " + str(new_solution_height))
+            # new_solution.drawSolution(10)
 
-        # Best improvement the solution, local search
-        newer_solution = FirstImprovement(newa_solution, curr_neighborhood)
-        newer_solution_height = newer_solution.height
-        print("First Improvement solution height: " + str(newer_solution_height))
-        # newer_solution.drawSolution(10)
-        
-        # Change Neighborhoods.
-        curr_solution, curr_neighborhood = NeighborhoodChange(curr_solution, newer_solution, curr_neighborhood)
-        print("Current Best solution height: " + str(curr_solution.height))
+            # Best improvement the solution, local search
+            newer_solution = VND(new_solution, max_neighborhood - 1)
+            newer_solution_height = newer_solution.drawHeight
+            print("Best Improvement solution height: " + str(newer_solution_height))
+            # newer_solution.drawSolution(10)
 
+            # Change Neighborhoods.
+            curr_solution, curr_neighborhood = NeighborhoodChange(curr_solution, newer_solution, curr_neighborhood)
+            print("Current Best solution height: " + str(curr_solution.drawHeight))
+            if curr_solution.height == 0:
+                return curr_solution
     return curr_solution

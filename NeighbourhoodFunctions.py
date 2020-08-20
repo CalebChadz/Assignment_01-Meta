@@ -2,6 +2,9 @@ import random
 import copy
 from Rectangle import *
 
+def takesize(elm):
+    return(elm.width * elm.height)
+
 def FlipOne(current_solution_list, index):
     temp_solution_list = copy.deepcopy(current_solution_list)
     temp_solution_list[index].Rotate()
@@ -30,6 +33,22 @@ def FlipTenPercent(current_solution_list, rand_list):
         tmp_solution_list[rand_list[i]].Rotate()
     return tmp_solution_list
     
+def FlipSort(current_solution_list, index):
+    temp_solution_list = copy.deepcopy(current_solution_list)
+    temp_solution_list[index].Rotate()
+    temp_solution_list.sort(key=takesize)
+    return temp_solution_list
+
+def MoveSort(current_solution_list, index):
+    temp_solution_list = copy.deepcopy(current_solution_list)
+    length = len(tmp_solution_list) - 1
+    rand1 = random.randint(0,length)
+    rand2 = random.randint(0,length)
+    rect = tmp_solution_list.pop(index)
+    tmp_solution_list.insert(rand2, rect)
+    tmp_solution_list.sort(key=takesize)
+    return temp_solution_list
+
 def genertateRandomList(current_solution_list):
     length = len(current_solution_list)
     rand_list = []
@@ -37,10 +56,15 @@ def genertateRandomList(current_solution_list):
         rand_list.append(random.randint(0, length -1))
     return rand_list
 
-
 def NeighborhoodGenerator(num_neighborhood, current_solution_list):
     neighborhood = []
-    if num_neighborhood == 4:
+    if num_neighborhood == 6:
+        for rec in range(int(len(current_solution_list) * 0.5)):
+            neighborhood.append(MoveSort(current_solution_list, rec))
+    elif num_neighborhood == 5:
+        for rect in range(len(current_solution_list)):
+            neighborhood.append(FlipSort(current_solution_list, rect))
+    elif num_neighborhood == 4:
         for rect in range(len(current_solution_list)):
             neighborhood.append(FlipOne(current_solution_list, rect))
     elif num_neighborhood == 3:

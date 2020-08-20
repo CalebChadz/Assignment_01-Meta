@@ -15,8 +15,8 @@ def CalculateRectanglePositions(rectangle_list, given_width, initial):
     init_x = 0
     init_y = 0
     for rect in rectangle_list:
-        if rect.width < rect.height and initial:
-            rect.Rotate()
+        #if rect.width < rect.height and initial:
+            #rect.Rotate()
         # check the bottom of rectangle is not colliding with any other rectangle for all side length
         ypos = 0
         while (ypos < rect.height):
@@ -52,17 +52,18 @@ def CalculateRectanglePositions(rectangle_list, given_width, initial):
                 solution_matrix[rect.ypos + y][rect.xpos + x] = rect.id
         init_x = 0
         init_y = 0
+    value = 0
+    for y in range(len(solution_matrix)):
+        for x in range(given_width):
+            if solution_matrix[y][x] == 0:
+                value += 1
+    if value == given_width:
+        value = 0
+        for i in range(given_width):
+            if not solution_matrix[len(solution_matrix) - 1][i] == 0:
+                value += 1
     # length of matrics directly corresponds to the solution height
-    return rectangle_list, solution_matrix
-
-# function to get the height of solution
-def getHeight(rectangle_list):
-    height = 0
-    for rect in rectangle_list:
-        this_height = rect.ypos + rect.height
-        if this_height > height:
-            height = this_height
-    return height
+    return rectangle_list, value, len(solution_matrix)
 
 
 # A rectangle object to represent the rectangles in out problem.
@@ -89,13 +90,12 @@ class Rect:
 class Solution:
     def __init__(self, rectangle_list, given_width, initial):
         self.given_width = given_width
-        self.rectangle_list, self.rectangle_matrix = CalculateRectanglePositions(rectangle_list, given_width, initial)
-        self.height = getHeight(self.rectangle_list)
+        self.rectangle_list, self.height, self.drawHeight = CalculateRectanglePositions(rectangle_list, given_width, initial)
         
     # function to draw a solution
     def drawSolution(self, scale):
         solution_width = (self.given_width * scale) + 1
-        solution_height =  (self.height * scale) + 1
+        solution_height =  (self.drawHeight * scale) + 1
         win = GraphWin("Solution Window", solution_width, solution_height) 
         # set background to black
         win.setBackground(color_rgb(150,200,210))

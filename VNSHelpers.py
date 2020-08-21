@@ -1,3 +1,5 @@
+#Caleb_1328518_Priyank_1297953
+
 from NeighbourhoodFunctions import *
 from Rectangle import *
 import random
@@ -89,10 +91,10 @@ def VND(solution, max_neighborhood):
         best_neighbor = Solution(neighbors[0], solution.given_width, False)
         for neighbor_list in neighbors:
             neighbor_solution = Solution(neighbor_list, solution.given_width, False)
-            if neighbor_solution.drawHeight <= best_neighbor.drawHeight:
+            if neighbor_solution.height <= best_neighbor.height:
                 best_neighbor = neighbor_solution
         curr_solution, curr_neighborhood = NeighborhoodChange(curr_solution, best_neighbor, curr_neighborhood)
-        print("Current Best solution height: " + str(curr_solution.drawHeight))
+        print("Current Best VND session height: " + str(curr_solution.drawHeight))
         if curr_solution.height == 0:
             return curr_solution
     return curr_solution
@@ -168,9 +170,9 @@ def GVNS(solution, max_neighborhood, max_time):
             # new_solution.drawSolution(10)
 
             # Best improvement the solution, local search
-            newer_solution = VND(new_solution, max_neighborhood - 1)
+            newer_solution = VND(new_solution, max_neighborhood)
             newer_solution_height = newer_solution.drawHeight
-            print("Best Improvement solution height: " + str(newer_solution_height))
+            print("VND solution height: " + str(newer_solution_height))
             # newer_solution.drawSolution(10)
 
             # Change Neighborhoods.

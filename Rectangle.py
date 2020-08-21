@@ -1,3 +1,5 @@
+#Caleb_1328518_Priyank_1297953
+
 import csv
 from graphics import *
 
@@ -75,8 +77,6 @@ class Rect:
         self.xpos = xpos
         self.ypos = ypos
         self.rotated = False
-        self.swapped = False
-        self.moved = False
 # Quickly print off this rectangles current values.
     def Print(self):
         return ("\nID: " + str(self.id) + "\nDimensions: (" + str(self.width) + ", " + str(self.height) + ")" + "\nCoordinates: (" + str(self.xpos) + ", " + str(self.ypos) + ")")

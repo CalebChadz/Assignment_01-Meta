@@ -1,3 +1,5 @@
+#Caleb_1328518_Priyank_1297953
+
 import random
 import copy
 from Rectangle import *
@@ -15,7 +17,6 @@ def FlipOne(current_solution_list, index):
 def MoveOne(current_solution_list, index):
     tmp_solution_list = copy.deepcopy(current_solution_list)
     length = len(tmp_solution_list) - 1
-    rand1 = random.randint(0,length)
     rand2 = random.randint(0,length)
     rect = tmp_solution_list.pop(index)
     tmp_solution_list.insert(rand2, rect)

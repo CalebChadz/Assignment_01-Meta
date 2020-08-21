@@ -1,3 +1,5 @@
+#Caleb_1328518_Priyank_1297953
+
 import csv
 import sys
 import pathlib
@@ -49,7 +51,7 @@ def main():
         searched_solution = RVNS(initial_solution, MAX_NEIGHBORHOOD, MAX_TIME)
     if variant == "G":
         searched_solution = GVNS(initial_solution, MAX_NEIGHBORHOOD, MAX_TIME)
-    print("Final found solution height: " + str(searched_solution.drawHeight) + " Found in time: " + str(time.time() - start))
+    print("Final found solution height: " + str(searched_solution.drawHeight) + " Found in time: " + str(time.time() - start) + " Value metric of: " + str(searched_solution.height))
     searched_solution.drawSolution(scale)
     return (str(searched_solution.height) + " " + str(time.time() - start))
 main()

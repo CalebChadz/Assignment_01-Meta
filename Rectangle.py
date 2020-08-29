@@ -1,6 +1,7 @@
 #Caleb_1328518_Priyank_1297953
-
 import csv
+import numba as nb
+import numpy as np
 from graphics import *
 
 def getByRectID(rect_List, _id):
@@ -10,61 +11,82 @@ def getByRectID(rect_List, _id):
             myRect = rect
     return myRect
 
-# funciton that decodes the list representation of boxes to a matrix representation and gives
-# the rectangles coordinates on a plane.
-def CalculateRectanglePositions(rectangle_list, given_width, initial):
-    solution_matrix = [ [0] * given_width ]
+@nb.jit(nopython=True)
+def check(rectHeight, rectWidth, rectId, given_width, solution_matrix):
+    solution_row = np.array([[0] * given_width])
     init_x = 0
     init_y = 0
-    for rect in rectangle_list:
-        #if rect.width < rect.height and initial:
-            #rect.Rotate()
-        # check the bottom of rectangle is not colliding with any other rectangle for all side length
-        ypos = 0
-        while (ypos < rect.height):
-            if(len(solution_matrix) <= init_y + ypos):
-                solution_matrix.append([0] * given_width)
-            xpos = 0
-            while (xpos < rect.width):
-                check = solution_matrix[init_y + ypos][init_x + xpos]
-                if (check != 0):
-                    trec = getByRectID(rectangle_list, check)
-                    xpos_skip = trec.xpos
-                    width_skip = trec.width
-                    init_x = width_skip + xpos_skip
-                    xpos = 0
-                    ypos = 0
-                else:
-                    xpos += 1
-                    
-                if((init_x + rect.width) > (given_width)):
-                    init_x = 0
-                    init_y += 1 
-                    xpos = 0
-                    ypos = 0
-                    if(len(solution_matrix) <= init_y + ypos):
-                        solution_matrix.append([0] * given_width)
-            ypos += 1
-        #now we have a free space to draw the rect
-        rect.xpos = init_x 
-        rect.ypos = init_y
-        # fill in its matrix space
-        for x in range(rect.width):
-            for y in range(rect.height):
-                solution_matrix[rect.ypos + y][rect.xpos + x] = rect.id
-        init_x = 0
-        init_y = 0
+    rectXpos = 0
+    rectYpos = 0
+    ypos = 0
+    while (ypos < rectHeight):
+        if(len(solution_matrix) <= init_y + ypos):
+            solution_matrix = np.vstack((solution_matrix, solution_row))
+        xpos = 0
+        while (xpos < rectWidth):
+            check = solution_matrix[init_y + ypos][init_x + xpos]
+            if (check != 0):
+                init_x += 1
+                xpos = 0
+                ypos = 0
+            else:
+                xpos += 1
+                
+            if((init_x + rectWidth) > (given_width)):
+                init_x = 0
+                init_y += 1 
+                xpos = 0
+                ypos = 0
+                if(len(solution_matrix) <= init_y + ypos):
+                    solution_matrix = np.vstack((solution_matrix, solution_row))
+        ypos += 1
+    #now we have a free space to draw the rect
+    rectXpos = init_x 
+    rectYpos = init_y
+    # fill in its matrix space
+    for x in range(rectWidth):
+        for y in range(rectHeight):
+            solution_matrix[rectYpos + y][rectXpos + x] = rectId
+    init_x = 0
+    init_y = 0
+    return rectXpos, rectYpos, solution_matrix
+
+@nb.jit(nopython=True)
+def getValue(solution_matrix, given_width):
+    length = len(solution_matrix)
     value = 0
-    for y in range(len(solution_matrix)):
+    rows = 0
+    for y in range(length):
         for x in range(given_width):
             if solution_matrix[y][x] == 0:
                 value += 1
     if value == given_width:
         value = 0
         for i in range(given_width):
-            if not solution_matrix[len(solution_matrix) - 1][i] == 0:
+            if not solution_matrix[length - 1][i] == 0:
                 value += 1
-    # length of matrics directly corresponds to the solution height
+        return value
+    else:
+        rows = (value / given_width)
+        value = 0
+        for r in range(rows):
+            for c in range(given_width):
+                if not solution_matrix[(length - r)-1][c] == 0:
+                    value += 1
+    return value
+
+# funciton that decodes the list representation of boxes to a matrix representation and gives
+# the rectangles coordinates on a plane.
+def CalculateRectanglePositions(rectangle_list, given_width, initial):
+    #print("Start")
+    #start = time.time()
+    solution_matrix = np.array([ [0] * given_width ])
+    init_x = 0
+    init_y = 0
+    for rect in rectangle_list:
+        rect.xpos, rect.ypos, solution_matrix = check(rect.height, rect.width, rect.id, given_width, solution_matrix)
+    value = getValue(solution_matrix, given_width)
+    #print("Time: " + str(time.time() - start))
     return rectangle_list, value, len(solution_matrix)
 
 

@@ -12,8 +12,8 @@ from graphics import *
 
 # Global Variables
 scale = 2
-MAX_NEIGHBORHOOD = 2
-MAX_TIME = 60
+MAX_NEIGHBORHOOD = 1
+MAX_TIME = 120
 given_solution_width = 0
 current_neighbourhood = 1
 initial_solution = None
@@ -39,7 +39,7 @@ def main():
     # Generate initial solution, represented as a list of boxes and thier coordinates.
     initial_solution = Solution(best_solution_list, given_solution_width, True)
     print ("Initial Solution Height: " + str(initial_solution.drawHeight))
-    initial_solution.drawSolution(scale)
+    #initial_solution.drawSolution(scale)
     
     # BVNS tim
     start = time.time()

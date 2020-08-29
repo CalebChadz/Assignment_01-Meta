@@ -53,17 +53,17 @@ def genertateRandomList(current_solution_list):
 # Used to generate full neighbourhoods for Best improvement or First Improvement.
 def NeighborhoodGenerator(num_neighborhood, current_solution_list):
     neighborhood = []
-    if num_neighborhood == 2:
+    if num_neighborhood == 1:
         for rect in range(len(current_solution_list)):
             neighborhood.append(FlipOne(current_solution_list, rect))
-    elif num_neighborhood == 4:
+    elif num_neighborhood == 3:
         for rec in range(int(len(current_solution_list) * 0.5)):
             neighborhood.append(MoveOne(current_solution_list, rec))
-    elif num_neighborhood == 3:
+    elif num_neighborhood == 4:
         for rec in range(int(len(current_solution_list) * 0.1)):
             rand_list = genertateRandomList(current_solution_list)
             neighborhood.append(MoveTenPercent(current_solution_list, rand_list))
-    elif num_neighborhood == 1:
+    elif num_neighborhood == 2:
         for rec in range(int(len(current_solution_list) * 0.2)):
             rand_list = genertateRandomList(current_solution_list)
             neighborhood.append(FlipTenPercent(current_solution_list, rand_list))
